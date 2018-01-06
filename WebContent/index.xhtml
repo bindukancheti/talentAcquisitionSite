@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" type="text/css" href="webapp/styles/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="webapp/styles/main.css"/>
+	<title>WelcomeTo Talent Acquisition Portal</title>
+	<style type="text/css">
+.col-xs-updated {
+	width: 92% !important;
+}
+</style>
+</h:head>
+<h:body>
+	<div class="container">
+		<div class="navbar navbar-inverse">
+			<div class="navbar-brand">Talent Acquisition Portal</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="col-xs-6">
+				<h:form id="login" styleClass="form-horizontal">
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-2" for="uname">UserName:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputText id="uname" value="#{credentials.userName}" styleClass="form-control"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-2" for="password">Password:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputSecret id="password" value="#{credentials.password}" styleClass="form-control"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<h:commandButton value="Login"
+								action="#{loginService.UservalidOrnot}" styleClass="btn btn-default"></h:commandButton>
+						</div>
+					</div>
+				</h:form>
+				</div>
+				<div class="col-xs-6">
+				<h:form id="register" styleClass="form-horizontal">
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-6" for="fname">First Name:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputText id="fname" value="#{register.firstName}" styleClass="form-control"></h:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-6" for="lname">Last Name:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputSecret id="lname" value="#{register.lastName}" styleClass="form-control"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-6" for="email">E Mail ID:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputSecret id="email" value="#{register.eMailId}" styleClass="form-control"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<h:outputLabel styleClass="control-label col-sm-6" for="password">Password:</h:outputLabel>
+						<div class="col-sm-6">
+							<h:inputSecret id="password" value="#{register.password}" styleClass="form-control"></h:inputSecret>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-6 col-sm-6">
+							<h:commandButton value="Register"
+								action="#{loginService.registration}" styleClass="btn btn-default"></h:commandButton>
+						</div>
+					</div>
+				</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>
