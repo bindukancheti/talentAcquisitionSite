@@ -1,4 +1,4 @@
-package com.TalenAcquisitionPortal.DTO;
+package com.TalenAcquisitionPortal.Dto;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;

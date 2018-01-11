@@ -1,8 +1,7 @@
-package com.TalenAcquisitionPortal.DTO;
+package com.TalenAcquisitionPortal.Dto;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name = "credentials", eager = true)
 @RequestScoped

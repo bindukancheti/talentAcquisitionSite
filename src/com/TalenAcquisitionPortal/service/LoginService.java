@@ -3,10 +3,9 @@ package com.TalenAcquisitionPortal.service;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-//import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 
-import com.TalenAcquisitionPortal.DTO.Credentials;
+import com.TalenAcquisitionPortal.Dto.Credentials;
+import com.TalentAcquisitionPortal.Dao.Login;
 
 @ManagedBean(name = "loginService", eager = true)
 @RequestScoped
@@ -23,7 +22,9 @@ public class LoginService {
 
 	public String UservalidOrnot() {
 		System.out.println("inside Validation");
-		if (credentials.getUserName().equals("Bindu")) {
+		Credentials credentialsFromTable = Login.getcredentials(credentials.getUserName());
+		if (credentials.getUserName().equals(credentialsFromTable.getUserName())) {
+		//if (credentials.getUserName().equals("Bindu")) {
 			return "success";
 		} else {
 			return "failure";
