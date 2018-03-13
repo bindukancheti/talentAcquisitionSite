@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet" type="text/css"
+		href="webapp/styles/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="webapp/styles/main.css" />
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">	
+	</script>
+	<title>WelcomeTo Talent Acquisition Portal</title>
+</h:head>
+<h:body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="hrManager.xhtml">Talent Acquisition
+				Portal</a>
+		</div>
+		<h:form>
+			<h:commandButton value="Logout"
+				action="#{hrManagerService.logout()}"
+				styleClass="btn btn-link navbar-btn navbar-right"></h:commandButton>
+		</h:form>
+	</div>
+	</nav>
+	<div class="container-fluid" style="margin-top: 50px">
+		<div class="container" style="margin-left: 160px">
+			<h:form class="container">
+				<div class="sidenav" style="margin-top: 50px">
+					<h:link value="Add Talent Manager" outcome="registerTalentManager" />
+					<h:link value="Applications" outcome="applicants" />
+					<h:link value="Applications To Respond" outcome="applicantsToRespond" />
+				</div>
+				<div class="row" style="margin-top: 50px">
+										<h:messages globalOnly="true" style="color:red" />
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="firstName">First Name</h:outputLabel> 
+							<h:inputText id="firstName" class="form-control" placeholder="First Name" value="#{hrManagerService.newTalentManager.firstName}"
+							required="true"	requiredMessage="First Name is required">
+							<f:validateLength maximum="30"></f:validateLength>
+							</h:inputText>
+						</div>
+						<h:message for="firstName" style="color:red" />
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="lastName">Last Name</h:outputLabel>
+							<h:inputText id="lastName" class="form-control" placeholder="Last Name" value="#{hrManagerService.newTalentManager.lastName}" 
+							required="true" requiredMessage="Last Name is required">
+							<f:validateLength maximum="30"></f:validateLength>
+							</h:inputText>
+						</div>
+						<h:message for="lastName" style="color:red" />
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel styleClass="control-label" for="inputEmail">Email address</h:outputLabel> 
+					<h:inputText class="form-control" id="inputEmail"
+						 placeholder="Enter email" value="#{hrManagerService.newTalentManager.userName}" required="true"
+									requiredMessage="Email is required">
+									<f:validateLength maximum="100"></f:validateLength>
+									</h:inputText>
+					<h:message for="inputEmail" style="color:red" />				 
+				</div>
+				<h:commandButton value="Submit" action="#{hrManagerService.addTalentManager}" styleClass="btn btn-primary"> </h:commandButton>
+			</h:form>
+		</div>
+	</div>
+</h:body>
+</html>
