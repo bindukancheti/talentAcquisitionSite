@@ -1,4 +1,115 @@
 body{
 	background-image: url("cs.jpg");
-	font-family: arial;
+	font-family: "Lato", sans-serif;
+}
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+.formBox{
+	margin-top: 90px;
+	padding: 50px;
+}
+.formBox  h1{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	margin-bottom: 50px;
+	text-transform: uppercase;
+	font-size: 48px;
+}
+.inputBox{
+	position: relative;
+	box-sizing: border-box;
+	margin-bottom: 50px;
+}
+.inputBox .inputText{
+	position: absolute;
+    font-size: 24px;
+    line-height: 50px;
+    transition: .5s;
+    opacity: .5;
+}
+.inputBox .input{
+	position: relative;
+	width: 100%;
+	height: 50px;
+	background: transparent;
+	border: none;
+    outline: none;
+    font-size: 24px;
+    border-bottom: 1px solid rgba(0,0,0,.5);
+
+}
+.focus .inputText{
+	transform: translateY(-30px);
+	font-size: 18px;
+	opacity: 1;
+	color: #00bcd4;
+
+}
+textarea{
+	height: 100px !important;
+}
+.profilebutton{
+	width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    background: #03A9F4;
+    color: #fff;
+}
+.order-table{
+	border-collapse:collapse;
+}
+
+.order-table-header{
+	text-align:center;
+	background:none repeat scroll 0 0 #E5E5E5;
+	border-bottom:1px solid #BBBBBB;
+	padding:16px;
+}
+
+.order-table-odd-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border-top:1px solid #BBBBBB;
+}
+
+.order-table-even-row{
+	text-align:center;
+	background:none repeat scroll 0 0 #F9F9F9;
+	border-top:1px solid #BBBBBB;
+}
+
+.tab-space{
+	padding-left:50px;
 }
