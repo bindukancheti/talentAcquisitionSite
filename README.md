@@ -1,4 +1,4 @@
-# talentAcquisitionSite
+# Talent Acquisition Portal
 
 TAP is an online recruitment medium to hire new employees for an organization, which involve roles of Hiree, HR and Talent Manager.
 Hiree has to register and login to site where the profile is created and can apply for the available open positions across the organization. There is also a privilege to check the status of the application.
