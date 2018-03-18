@@ -71,12 +71,12 @@ public class HireeProfileService {
 			Object value) {
 		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
 		Part file = (Part)value;
-		if (file.getSize() > 128) {
+		if (file.getSize() > 1048575) {
 			msgs.add(new FacesMessage("File is too big"));
 		}
-		if (!"text/plain".equals(file.getContentType())) {
-			msgs.add(new FacesMessage("Please attach text file"));
-		}
+//		if (!"text/plain".equals(file.getContentType())) {
+//			msgs.add(new FacesMessage("Please attach text file"));
+//		}
 		if (!msgs.isEmpty()) {
 			throw new ValidatorException(msgs);
 		}

@@ -33,7 +33,7 @@ public class HrManagerService {
 	private Credentials newTalentManager = new Credentials();
 	private String emailId;
 	private List<Applicants> applicants;
-	private String talentManagerSelected = null;
+	private String[] talentManagerSelected=new String[100];
 	private List<ApplicantsToRespond> aplicantsToRespond;
 	private String senderEmailId="smartflints@gmail.com";
 	private String senderPassword="fIN#1402";
@@ -62,11 +62,11 @@ public class HrManagerService {
 		this.aplicantsToRespond = aplicantsToRespond;
 	}
 
-	public String getTalentManagerSelected() {
+	public String[] getTalentManagerSelected() {
 		return talentManagerSelected;
 	}
 
-	public void setTalentManagerSelected(String talentManagerSelected) {
+	public void setTalentManagerSelected(String[] talentManagerSelected) {
 		this.talentManagerSelected = talentManagerSelected;
 	}
 
@@ -128,15 +128,14 @@ public class HrManagerService {
 	public List<Applicants> getApplicantsList() {
 		List<Applicants> applicantsList= new ArrayList<Applicants>();
 		applicantsList = JobApplicationStatus.getApplicantsAwaitingHR();
-		List<String> talentManagers = Login.getTalentmanagers();
 		for(Applicants applicant:applicantsList) {
-			applicant.setTalentManagers(talentManagers);
+			applicant.setTalentManagers(Login.getTalentmanagers(applicant.getCompany()));
 		}
 		return applicantsList;
 	}
 	
-	public void updateApplicationStatus(Applicants applicant) {
-		JobApplicationStatus.updateApplicationStatusToAwaitingTalentManager(applicant.getEmail(), applicant.getJobid(), talentManagerSelected);
+	public void updateApplicationStatus(Applicants applicant, int index) {
+		JobApplicationStatus.updateApplicationStatusToAwaitingTalentManager(applicant.getEmail(), applicant.getJobid(), this.talentManagerSelected[index]);
 		this.applicants= getApplicantsList();
 	}
 	

@@ -11,9 +11,21 @@ public class Applicants {
 	private String email;
 	private int jobid;
 	private String comments;
+	private String company;
+	private String professionalSummary;
 	
-	
-	
+	public String getProfessionalSummary() {
+		return professionalSummary;
+	}
+	public void setProfessionalSummary(String professionalSummary) {
+		this.professionalSummary = professionalSummary;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
 	public String getComments() {
 		return comments;
 	}

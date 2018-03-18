@@ -46,6 +46,7 @@
 								<th>Job ID</th>
 								<th>Job Description</th>
 								<th>Eligibility</th>
+								<th>Company</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,6 +55,7 @@
 									<td>#{jobDetail.jobId}</td>
 									<td>#{jobDetail.jobDescription}</td>
 									<td>#{jobDetail.eligibility}</td>
+									<td>#{jobDetail.company}</td>
 									<td><h:commandButton value="Apply"
 											action="#{hireeService.applyJob(jobDetail.jobId)}"
 											styleClass="btn btn-default"></h:commandButton></td>

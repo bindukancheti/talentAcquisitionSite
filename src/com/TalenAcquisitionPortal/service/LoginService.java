@@ -1,5 +1,7 @@
 package com.TalenAcquisitionPortal.service;
 
+import java.io.IOException;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -9,6 +11,7 @@ import javax.faces.context.FacesContext;
 
 import com.TalenAcquisitionPortal.Dto.Credentials;
 import com.TalentAcquisitionPortal.Dao.Login;
+import com.TalentAquisitionPortal.Utils.VerifyRecaptcha;
 
 @ManagedBean(name = "loginService", eager = true)
 @RequestScoped
@@ -16,14 +19,14 @@ public class LoginService {
 	@ManagedProperty(value = "#{credentials}")
 	private Credentials credentials;
 	private Credentials register= new Credentials();
-	private Boolean imNotRobot;
+//	private Boolean imNotRobot;
 
-	public Boolean getImNotRobot() {
-		return imNotRobot;
-	}
-	public void setImNotRobot(Boolean imNotRobot) {
-		this.imNotRobot = imNotRobot;
-	}
+//	public Boolean getImNotRobot() {
+//		return imNotRobot;
+//	}
+//	public void setImNotRobot(Boolean imNotRobot) {
+//		this.imNotRobot = imNotRobot;
+//	}
 	public Credentials getRegister() {
 		return register;
 	}
@@ -41,7 +44,15 @@ public class LoginService {
 		System.out.println("inside Validation");
 		String hiree="Hiree";
 		String hrManager="HR Manager";
+		FacesContext context = FacesContext.getCurrentInstance();
+		String gRecaptchaResponse = context.getExternalContext().getRequestParameterMap().get("g-recaptcha-response");
 		Credentials credentialsFromTable = Login.getcredentials(credentials.getUserName());
+		boolean imNotRobot=false;
+		try {
+			imNotRobot = VerifyRecaptcha.verify(gRecaptchaResponse);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		if (credentials.getUserName().equals(credentialsFromTable.getUserName()) &&
 				credentials.getPassword().equals(credentialsFromTable.getPassword()) && imNotRobot) {
 			if(((credentialsFromTable.getRole()).trim()).equals(hrManager)) {
@@ -53,7 +64,6 @@ public class LoginService {
 			}
 			
 		} else {
-			FacesContext context = FacesContext.getCurrentInstance();
 			if(imNotRobot) {
 				context.addMessage(null, new FacesMessage("Please Enter Valid Credentials!!!"));
 			}else {
@@ -66,6 +76,7 @@ public class LoginService {
 	public String registration() {
 		System.out.println("inside Registration");
 		register.setRole("Hiree");
+		register.setCompany("");
 		String status=Login.insertUser(register);
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (status=="success") {

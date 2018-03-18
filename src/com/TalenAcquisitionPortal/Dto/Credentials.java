@@ -12,7 +12,15 @@ public class Credentials {
 	private String role;
 	private String firstName;
 	private String lastName;
+	private String company;
 	
+	
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

@@ -15,15 +15,18 @@ public class Login {
 
 	private static Credentials credentials = new Credentials();
 	public static Credentials getcredentials(String username) {
+		Connection con=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
 
 			String query = "select * from authenticate where userName = ?";
-			PreparedStatement statement = con.prepareStatement(query); 
+			statement = con.prepareStatement(query); 
 			statement.setString(1,username);
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 			while (resultSet.next())
 			{
 				credentials.setUserName(resultSet.getString("userName"));
@@ -31,31 +34,50 @@ public class Login {
 				credentials.setRole(resultSet.getString("userrole"));
 				System.out.format("\n" + " " +credentials.getUserName() + " " + credentials.getPassword() + " "+ credentials.getUserName().length());
 			}
-			statement.close();
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
+		} finally {
+			if (resultSet != null) {
+		        try {
+		            resultSet.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    } 
+			if (statement != null) {
+			        try {
+			            statement.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+			    if (con != null) {
+			        try {
+			            con.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
 		}
 		return credentials;
 	}
 
 	public static String insertUser(Credentials credentials) {
+		Connection con=null;
+		PreparedStatement statement=null;
+		PreparedStatement statement1=null;
+		ResultSet resultSet=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
 
-			String sql = "insert into authenticate values (?,?,?,?,?)";
-			PreparedStatement statement = con.prepareStatement(sql);    
+			String sql = "insert into authenticate values (?,?,?,?,?,?)";
+			statement = con.prepareStatement(sql);    
 			statement.setString(1, credentials.getUserName());    
 			statement.setString(2, credentials.getPassword());
 			statement.setString(3, credentials.getRole());
 			statement.setString(4, credentials.getFirstName());
 			statement.setString(5, credentials.getLastName());
+			statement.setString(6, credentials.getCompany());
 			statement.execute();
-			statement.close();
 
 			String insertUser = "insert into user values(?,?,?,?,?,?,?)";
-			PreparedStatement statement1 = con.prepareStatement(insertUser);    
+			statement1 = con.prepareStatement(insertUser);    
 			statement1.setString(6, credentials.getUserName());    
 			statement1.setString(1, credentials.getFirstName());
 			statement1.setString(2, credentials.getLastName());
@@ -64,7 +86,6 @@ public class Login {
 			statement1.setString(5, null);
 			statement1.setString(7, null);
 			statement1.execute();
-			statement1.close();
 		} catch (SQLException e2) {
 			if(e2.getSQLState().startsWith("23")) {
 				System.out.println("Duplicate");
@@ -74,48 +95,146 @@ public class Login {
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return "failed";
+		} finally {
+			if (resultSet != null) {
+		        try {
+		            resultSet.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    } 
+			if (statement != null) {
+			        try {
+			            statement.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+			if (statement1 != null) {
+		        try {
+		            statement1.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    }
+			    if (con != null) {
+			        try {
+			            con.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
 		}
 		return "success";
 	}
-	public static List<String> getTalentmanagers() {
+	public static List<String> getTalentmanagers(String company) {
 		List<String> talentManagers = new ArrayList<String>();
+		Connection con=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
 			String talentManager="Talent Manager";
 
-			String query = "select username from authenticate where userrole=?";
-			PreparedStatement statement = con.prepareStatement(query); 
+			String query = "select username from authenticate where userrole=? and company=?";
+			statement = con.prepareStatement(query); 
 			statement.setString(1,talentManager);
-			ResultSet resultSet = statement.executeQuery();
+			statement.setString(2, company);
+			resultSet = statement.executeQuery();
 			while (resultSet.next())
 			{
 				talentManagers.add(resultSet.getString("username"));
 			}
-			statement.close();
 		} catch (Exception e2) {
 			System.out.println(e2.getMessage());
+		} finally {
+			if (resultSet != null) {
+		        try {
+		            resultSet.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    } 
+			if (statement != null) {
+			        try {
+			            statement.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+			    if (con != null) {
+			        try {
+			            con.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
 		}
 		return talentManagers;
 	}
 	public static String changePassword(String newPassword, String userName) {
+		Connection con=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection(
+			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
 			String sql = "update authenticate set password = ? where username=?";
-			PreparedStatement statement = con.prepareStatement(sql);    
+			statement = con.prepareStatement(sql);    
 
 			statement.setString(1, newPassword);
 			statement.setString(2, userName);
 
 			statement.executeUpdate();
-			statement.close();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
 			return "failed";
+		} finally {
+			if (resultSet != null) {
+		        try {
+		            resultSet.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    } 
+			if (statement != null) {
+			        try {
+			            statement.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+			    if (con != null) {
+			        try {
+			            con.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
 		}	
 		return "success";
+	}
+
+	public static String getCompany(String userName) {
+		String company=null;
+		Connection con=null;
+		PreparedStatement statement=null;
+		ResultSet resultSet=null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(
+					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
+			String query = "select company from authenticate where userName=?";
+			statement = con.prepareStatement(query); 
+			statement.setString(1,userName);
+			resultSet = statement.executeQuery();
+			while (resultSet.next())
+			{
+				company=resultSet.getString("company");
+			}
+			statement.close();
+		} catch (Exception e2) {
+			System.out.println(e2.getMessage());
+		} finally {
+			if (resultSet != null) {
+		        try {
+		            resultSet.close();
+		        } catch (SQLException e) { System.out.println(e.getMessage());}
+		    } 
+			if (statement != null) {
+			        try {
+			            statement.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+			    if (con != null) {
+			        try {
+			            con.close();
+			        } catch (SQLException e) { System.out.println(e.getMessage());}
+			    }
+		}
+		return company;
 	}
 }

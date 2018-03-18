@@ -7,14 +7,13 @@
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1"
 		http-equiv="X-UA-Conpatible" />
-	<link rel="stylesheet" type="text/css"
-		href="webapp/styles/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="webapp/styles/main.css" />
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="webapp/styles/main.css"></link>
 	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js">
-		
-	</script>
-	<!-- <script src="webapp/js/sideNav.js"></script> -->
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<title>WelcomeTo Talent Acquisition Portal</title>
 </h:head>
 <h:body>
@@ -25,8 +24,7 @@
 				Portal</a>
 		</div>
 		<h:form>
-			<h:commandButton value="Logout"
-				action="#{hrManagerService.logout()}"
+			<h:commandButton value="Logout" action="#{hrManagerService.logout()}"
 				styleClass="btn btn-link navbar-btn navbar-right"></h:commandButton>
 		</h:form>
 	</div>
@@ -39,33 +37,60 @@
 				<h:link value="Applications To Respond"
 					outcome="applicantsToRespond" />
 			</div>
-			<div class="main">
-				<div class="row">
-					<table class="table table-striped">
-						<thead>
-							<tr>
-								<th>First Name</th>
-								<th>Job Description</th>
-								<th>Talent Manager</th>
-							</tr>
-						</thead>
-						<tbody>
-							<ui:repeat value="#{hrManagerService.applicants}" var="applicant">
-								<tr>
-									<td>#{applicant.firstName}</td>
-									<td>#{applicant.jobDescription}</td>
-									<td><h:selectOneMenu
-											value="#{hrManagerService.talentManagerSelected}">
-											<f:selectItems value="#{applicant.talentManagers}"></f:selectItems>
-										</h:selectOneMenu></td>
-									<td><h:commandButton value="Forward"
-											action="#{hrManagerService.updateApplicationStatus(applicant)}"
-											styleClass="btn btn-default"></h:commandButton></td>
-								</tr>
-							</ui:repeat>
-						</tbody>
-					</table>
+			<div Style="margin-left: 100px">
+				<div style="margin-top: 50px">
+					<h:messages globalOnly="true" style="color:red" />
 				</div>
+				<ui:repeat value="#{hrManagerService.applicants}" var="applicant"
+					varStatus="myVarStatus">
+					<div class="panel panel-default">
+						<div class="panel-heading" role="tab"
+							id="heading#{myVarStatus.index}">
+							<h4 class="panel-title">
+								<a role="button" data-toggle="collapse" data-parent="#accordion"
+									href="#sample-list#{myVarStatus.index}" aria-expanded="false"
+									aria-controls="sample-list">
+									<div class="row">
+										<div class="col-sm-3">#{applicant.firstName}</div>
+										<div class="col-sm-3">#{applicant.jobDescription}</div>
+										<div class="col-sm-3">
+											<h:selectOneMenu id="talentManagerSelected"
+												value="#{hrManagerService.talentManagerSelected[myVarStatus.index]}">
+												<f:selectItems value="#{applicant.talentManagers}"></f:selectItems>
+											</h:selectOneMenu>
+										</div>
+									</div>
+								</a>
+							</h4>
+						</div>
+
+						<div id="sample-list#{myVarStatus.index}"
+							class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="heading#{myVarStatus.index}">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<h:outputLabel styleClass="control-label" for="profSummary">Professional summary</h:outputLabel>
+											<h:outputText id="profSummary" class="form-control"
+												value="#{applicant.professionalSummary}"></h:outputText>
+										</div>
+									</div>
+
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<h:commandButton value="Forward"
+												action="#{hrManagerService.updateApplicationStatus(applicant, myVarStatus.index)}"
+												styleClass="btn btn-default"></h:commandButton>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ui:repeat>
 			</div>
 		</div>
 	</h:form>
