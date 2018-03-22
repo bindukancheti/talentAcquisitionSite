@@ -50,17 +50,20 @@ public class HireeProfileService {
 		if (user.isTerms()) {
 			UserProfile.insertPersonalProfile(user, credentials.getUserName());
 			context.addMessage(null, new FacesMessage("Your personal details are updated"));
+			user=new User();
+			getUserFromDB();
 		}else {
 			context.addMessage(null, new FacesMessage("Please declare that details furnished are correct!!!"));
 		}
-
 		return null;
 	}
 	public String uploadProfessionalDetails(){
 		FacesContext context = FacesContext.getCurrentInstance();
+		String experience = user.getExperienceYears() + " Years " + user.getExperienceMonths() + " Months"; 
 		if (user.isTerms()) {
-			UserProfile.insertProfessionalProfile(user, credentials.getUserName());
+			UserProfile.insertProfessionalProfile(user, credentials.getUserName(), experience);
 			context.addMessage(null, new FacesMessage("Your professional details are updated"));
+			user=new User();
 		}else {
 			context.addMessage(null, new FacesMessage("Please declare that details furnished are correct!!!"));
 		}	

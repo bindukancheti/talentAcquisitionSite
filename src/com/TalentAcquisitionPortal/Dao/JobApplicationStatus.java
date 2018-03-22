@@ -192,7 +192,7 @@ public class JobApplicationStatus {
 		}	
 		return applicantList;
 	}
-	public static void updateApplicationStatusToAwaitingTalentManager(String email, int jobId, String talentManagerSelected) {
+	public static void updateApplicationStatusToAwaitingTalentManager(String email, int jobId, String talentManagerSelected, String status) {
 		Connection con=null;
 		PreparedStatement statement=null;
 		ResultSet resultSet=null;
@@ -203,7 +203,7 @@ public class JobApplicationStatus {
 			String sql = "update applicationstatus set status = ?, talentManager=? where hireename=? and jobid=?";
 			statement = con.prepareStatement(sql);    
 
-			statement.setString(1, "Awaiting Approval From Talent Manager");
+			statement.setString(1, status);
 			statement.setString(2, talentManagerSelected);
 			statement.setString(3, email);
 			statement.setInt(4, jobId);

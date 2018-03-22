@@ -41,6 +41,10 @@
 				<div style="margin-top: 50px">
 					<h:messages globalOnly="true" style="color:red" />
 				</div>
+				<div>
+					<h3 style="color: #000066">Applicants</h3>
+					<p>Below are the job applicants of Talent Acquisition Portal</p>
+				</div>
 				<ui:repeat value="#{hrManagerService.applicants}" var="applicant"
 					varStatus="myVarStatus">
 					<div class="panel panel-default">
@@ -51,14 +55,8 @@
 									href="#sample-list#{myVarStatus.index}" aria-expanded="false"
 									aria-controls="sample-list">
 									<div class="row">
-										<div class="col-sm-3">#{applicant.firstName}</div>
-										<div class="col-sm-3">#{applicant.jobDescription}</div>
-										<div class="col-sm-3">
-											<h:selectOneMenu id="talentManagerSelected"
-												value="#{hrManagerService.talentManagerSelected[myVarStatus.index]}">
-												<f:selectItems value="#{applicant.talentManagers}"></f:selectItems>
-											</h:selectOneMenu>
-										</div>
+										<div class="col-sm-6">#{applicant.firstName}</div>
+										<div class="col-sm-6">#{applicant.jobDescription}</div>
 									</div>
 								</a>
 							</h4>
@@ -69,19 +67,54 @@
 							aria-labelledby="heading#{myVarStatus.index}">
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<h:outputLabel styleClass="control-label" for="profSummary">Professional summary</h:outputLabel>
-											<h:outputText id="profSummary" class="form-control"
-												value="#{applicant.professionalSummary}"></h:outputText>
-										</div>
-									</div>
-
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>Hiree Profile</th>
+												<th>RequiredProfile</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>#{applicant.comparission.experience}</td>
+												<td>#{applicant.comparission.requiredExperience}</td>
+											</tr>
+											<tr>
+												<td>#{applicant.comparission.aggregate}</td>
+												<td>#{applicant.comparission.requiredAggregate}</td>
+											</tr>
+											<tr>
+												<td>#{applicant.comparission.technologies}</td>
+												<td>#{applicant.comparission.requiredTechnologies}</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 								<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group">
-											<h:commandButton value="Forward"
+											<h:outputLabel styleClass="control-label" for="talentManager">Talent Manager</h:outputLabel>
+											<h:selectOneMenu class="form-control" id="talentManager"
+												value="#{hrManagerService.talentManagerSelected[myVarStatus.index]}">
+												<f:selectItems value="#{applicant.talentManagers}"></f:selectItems>
+											</h:selectOneMenu>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<h:outputLabel styleClass="control-label" for="action">Action</h:outputLabel>
+											<h:selectOneMenu class="form-control" id="action"
+												value="#{hrManagerService.action[myVarStatus.index]}">
+												<f:selectItem itemValue="Approve" itemLabel="Forward To Talentmanager" />
+												<f:selectItem itemValue="Reject" itemLabel="Reject" />
+											</h:selectOneMenu>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<h:commandButton value="Submit"
 												action="#{hrManagerService.updateApplicationStatus(applicant, myVarStatus.index)}"
 												styleClass="btn btn-default"></h:commandButton>
 										</div>

@@ -13,7 +13,14 @@ public class Applicants {
 	private String comments;
 	private String company;
 	private String professionalSummary;
+	private Comparission comparission;
 	
+	public Comparission getComparission() {
+		return comparission;
+	}
+	public void setComparission(Comparission comparission) {
+		this.comparission = comparission;
+	}
 	public String getProfessionalSummary() {
 		return professionalSummary;
 	}

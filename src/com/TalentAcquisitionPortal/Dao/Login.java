@@ -56,7 +56,7 @@ public class Login {
 		return credentials;
 	}
 
-	public static String insertUser(Credentials credentials) {
+	public static String insertUser(Credentials credentials, String phone) {
 		Connection con=null;
 		PreparedStatement statement=null;
 		PreparedStatement statement1=null;
@@ -76,7 +76,7 @@ public class Login {
 			statement.setString(6, credentials.getCompany());
 			statement.execute();
 
-			String insertUser = "insert into user values(?,?,?,?,?,?,?)";
+			String insertUser = "insert into user values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			statement1 = con.prepareStatement(insertUser);    
 			statement1.setString(6, credentials.getUserName());    
 			statement1.setString(1, credentials.getFirstName());
@@ -85,6 +85,12 @@ public class Login {
 			statement1.setString(4, null);
 			statement1.setString(5, null);
 			statement1.setString(7, null);
+			statement1.setString(8, phone);
+			statement1.setString(9, null);
+			statement1.setString(10, null);
+			statement1.setString(11, null);
+			statement1.setString(12, null);
+			statement1.setString(13, null);
 			statement1.execute();
 		} catch (SQLException e2) {
 			if(e2.getSQLState().startsWith("23")) {

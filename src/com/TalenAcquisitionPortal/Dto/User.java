@@ -26,7 +26,56 @@ public class User {
 	private String emailId;
 	private boolean terms;
 	private Part file;
+	private String phone;
+	private String qualification;
+	private String specialization;
+	private String technologies;
+	private String aggregate;
+	private String experienceYears;
+	private String experienceMonths;
 	
+	public String getQualification() {
+		return qualification;
+	}
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+	public String getSpecialization() {
+		return specialization;
+	}
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
+	}
+	public String getTechnologies() {
+		return technologies;
+	}
+	public void setTechnologies(String technologies) {
+		this.technologies = technologies;
+	}
+	public String getAggregate() {
+		return aggregate;
+	}
+	public void setAggregate(String aggregate) {
+		this.aggregate = aggregate;
+	}
+	public String getExperienceYears() {
+		return experienceYears;
+	}
+	public void setExperienceYears(String experienceYears) {
+		this.experienceYears = experienceYears;
+	}
+	public String getExperienceMonths() {
+		return experienceMonths;
+	}
+	public void setExperienceMonths(String experienceMonths) {
+		this.experienceMonths = experienceMonths;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

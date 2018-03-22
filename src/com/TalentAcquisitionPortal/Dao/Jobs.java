@@ -58,7 +58,7 @@ public class Jobs {
 		}
 		return jobDetails;
 	}
-	public static String postJob(String jobDescription, String eligibility, String company) {
+	public static String postJob(JobDetails jobDetails, String company, String experience) {
 		Connection con=null;
 		PreparedStatement statement=null;
 		ResultSet resultSet=null;
@@ -67,12 +67,15 @@ public class Jobs {
 			con = DriverManager.getConnection(
 					"jdbc:mysql://localhost:3306/TapDB", "root", "root");
 
-			String sql = "insert into jobdetails(jobDescription, eligibility, company,jobactive) values (?,?,?,?)";
+			String sql = "insert into jobdetails(jobDescription, eligibility, company,jobactive, technologies, aggregate, experience) values (?,?,?,?,?,?,?)";
 			statement = con.prepareStatement(sql);    
-			statement.setString(1, jobDescription);    
-			statement.setString(2, eligibility);
+			statement.setString(1, jobDetails.getJobDescription());    
+			statement.setString(2, jobDetails.getEligibility());
 			statement.setString(3, company);
 			statement.setString(4, "Y");
+			statement.setString(5, jobDetails.getTechnologies());
+			statement.setString(6, jobDetails.getAggregate());
+			statement.setString(7, experience);
 			statement.execute();
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());

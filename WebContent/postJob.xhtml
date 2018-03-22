@@ -47,7 +47,8 @@
 					<h:inputTextarea id="jobDescription" class="form-control"
 						placeholder="Enter Job Desription"
 						value="#{talentManagerService.jobDetails.jobDescription}"
-						required="true" requiredMessage="Job Description is required">
+						required="true" requiredMessage="Job Description is required"
+						validatorMessage="Text entered is not valid">
 						<f:validateLength maximum="1000"></f:validateLength>
 					</h:inputTextarea>
 				</div>
@@ -62,6 +63,71 @@
 					</h:inputTextarea>
 				</div>
 				<h:message for="eligibility" style="color:red" />
+				<div class="form-group">
+					<h:outputLabel styleClass="control-label" for="aggregate">Required Aggregate</h:outputLabel>
+					<h:inputText class="form-control" id="aggregate"
+						value="#{talentManagerService.jobDetails.aggregate}"
+						required="true" requiredMessage="aggregate is required"
+						validatorMessage="aggregate is not valid">
+						<f:validateDoubleRange minimum="0.1" maximum="100.00" />
+					</h:inputText>
+					<h:message for="aggregate" style="color:red" />
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="experiencYears">Experience Years</h:outputLabel>
+							<h:selectOneMenu id="experiencYears"
+								value="#{talentManagerService.jobDetails.experienceYears}"
+								required="true" requiredMessage="Experience is required">
+								<f:selectItem itemValue="One" itemLabel="1" />
+								<f:selectItem itemValue="Two" itemLabel="2" />
+								<f:selectItem itemValue="Three" itemLabel="3" />
+								<f:selectItem itemValue="Four" itemLabel="4" />
+								<f:selectItem itemValue="Five" itemLabel="5" />
+								<f:selectItem itemValue="Six" itemLabel="6" />
+								<f:selectItem itemValue="Seven" itemLabel="7" />
+								<f:selectItem itemValue="Eight" itemLabel="8" />
+								<f:selectItem itemValue="Nine" itemLabel="9" />
+								<f:selectItem itemValue="Ten" itemLabel="10" />
+							</h:selectOneMenu>
+							<h:message for="experiencYears" style="color:red" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="experienceMonths">Experience Months</h:outputLabel>
+							<h:selectOneMenu id="experienceMonths"
+								value="#{talentManagerService.jobDetails.experienceMonths}"
+								required="true" requiredMessage="Experience is required">
+								<f:selectItem itemValue="One" itemLabel="1" />
+								<f:selectItem itemValue="Two" itemLabel="2" />
+								<f:selectItem itemValue="Three" itemLabel="3" />
+								<f:selectItem itemValue="Four" itemLabel="4" />
+								<f:selectItem itemValue="Five" itemLabel="5" />
+								<f:selectItem itemValue="Six" itemLabel="6" />
+								<f:selectItem itemValue="Seven" itemLabel="7" />
+								<f:selectItem itemValue="Eight" itemLabel="8" />
+								<f:selectItem itemValue="Nine" itemLabel="9" />
+								<f:selectItem itemValue="Ten" itemLabel="10" />
+								<f:selectItem itemValue="Ten" itemLabel="11" />
+								<f:selectItem itemValue="Ten" itemLabel="12" />
+							</h:selectOneMenu>
+							<h:message for="experienceMonths" style="color:red" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel styleClass="control-label" for="technologies">Required Technologies</h:outputLabel>
+					<h:inputText class="form-control" id="technologies"
+						value="#{talentManagerService.jobDetails.technologies}"
+						required="true" requiredMessage="Technologies are required"
+						validatorMessage="Text entered is not valid">
+						<f:validateLength maximum="200"></f:validateLength>
+						<f:validateRegex pattern="[a-zA-Z][a-zA-Z ]+(, [a-zA-Z]+)+" />
+					</h:inputText>
+					<h:message for="technologies" style="color:red" />
+				</div>
 				<div class="form-group">
 					<h:commandButton value="Publish"
 						action="#{talentManagerService.postJob()}"

@@ -43,6 +43,10 @@
 				<div style="margin-top: 50px">
 					<h:messages globalOnly="true" style="color:red" />
 				</div>
+					<div>
+					<h3 style="color: #000066">Applicants</h3>
+					<p>Below are the job applicants of Talent Acquisition Portal awaiting for your approval</p>
+				</div>
 				<ui:repeat value="#{talentManagerService.applicants}"
 					var="applicant" varStatus="myVarStatus">
 					<div class="panel panel-default">

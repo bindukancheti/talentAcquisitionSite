@@ -11,7 +11,35 @@ public class JobDetails {
 	private String eligibility;
 	private String company;
 	private String jobActive;
-	
+	private String experienceYears;
+	private String experienceMonths;
+	private String aggregate;
+	private String technologies;
+
+	public String getExperienceYears() {
+		return experienceYears;
+	}
+	public void setExperienceYears(String experienceYears) {
+		this.experienceYears = experienceYears;
+	}
+	public String getExperienceMonths() {
+		return experienceMonths;
+	}
+	public void setExperienceMonths(String experienceMonths) {
+		this.experienceMonths = experienceMonths;
+	}
+	public String getAggregate() {
+		return aggregate;
+	}
+	public void setAggregate(String aggregate) {
+		this.aggregate = aggregate;
+	}
+	public String getTechnologies() {
+		return technologies;
+	}
+	public void setTechnologies(String technologies) {
+		this.technologies = technologies;
+	}
 	public String getJobActive() {
 		return jobActive;
 	}

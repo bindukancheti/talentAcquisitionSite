@@ -48,6 +48,104 @@
 						requiredMessage="Profile Summary is required"></h:inputTextarea>
 					<h:message for="profileSummary" style="color:red" />
 				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="qualification">Qualification</h:outputLabel>
+							<h:inputText class="form-control" id="qualification"
+								value="#{hireeProfileService.user.qualification}"
+								required="true" requiredMessage="Qualification is required"
+							validatorMessage="Text entered is not valid">
+									<f:validateLength maximum="20"></f:validateLength>
+									<f:validateRegex pattern="[a-zA-Z][a-zA-Z ]+" />
+							</h:inputText>
+							<h:message for="qualification" style="color:red" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="specialization">Specialization</h:outputLabel>
+							<h:selectOneMenu class="form-control" id="specialization"
+								value="#{hireeProfileService.user.specialization}"
+								required="true" requiredMessage="Specialization is required">
+								<f:selectItem itemValue="ECE"
+									itemLabel="Electronics And Communication" />
+								<f:selectItem itemValue="EEE"
+									itemLabel="Electrical And electronics" />
+								<f:selectItem itemValue="CSE"
+									itemLabel="Computer Science Engineering" />
+								<f:selectItem itemValue="MEC" itemLabel="Mechanical Engineering" />
+								<f:selectItem itemValue="CVL" itemLabel="Civil Engineering" />
+								<f:selectItem itemValue="OTH" itemLabel="Others" />
+							</h:selectOneMenu>
+							<h:message for="specialization" style="color:red" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel styleClass="control-label" for="aggregate">Aggregate</h:outputLabel>
+					<h:inputText class="form-control" id="aggregate"
+						value="#{hireeProfileService.user.aggregate}" required="true"
+						requiredMessage="aggregate is required" validatorMessage="aggregate is not valid">
+						<f:validateDoubleRange minimum="0.1" maximum="100.00" />
+					</h:inputText>
+					<h:message for="aggregate" style="color:red" />
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="experiencYears">Experience Years</h:outputLabel>
+							<h:selectOneMenu id="experiencYears" class="form-control"
+								value="#{hireeProfileService.user.experienceYears}"
+								required="true" requiredMessage="Experience is required">
+								<f:selectItem itemValue="One" itemLabel="1" />
+								<f:selectItem itemValue="Two" itemLabel="2" />
+								<f:selectItem itemValue="Three" itemLabel="3" />
+								<f:selectItem itemValue="Four" itemLabel="4" />
+								<f:selectItem itemValue="Five" itemLabel="5" />
+								<f:selectItem itemValue="Six" itemLabel="6" />
+								<f:selectItem itemValue="Seven" itemLabel="7" />
+								<f:selectItem itemValue="Eight" itemLabel="8" />
+								<f:selectItem itemValue="Nine" itemLabel="9" />
+								<f:selectItem itemValue="Ten" itemLabel="10" />
+							</h:selectOneMenu>
+							<h:message for="experiencYears" style="color:red" />
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<h:outputLabel styleClass="control-label" for="experienceMonths">Experience Months</h:outputLabel>
+							<h:selectOneMenu id="experienceMonths" class="form-control"
+								value="#{hireeProfileService.user.experienceMonths}"
+								required="true" requiredMessage="Experience is required">
+								<f:selectItem itemValue="One" itemLabel="1" />
+								<f:selectItem itemValue="Two" itemLabel="2" />
+								<f:selectItem itemValue="Three" itemLabel="3" />
+								<f:selectItem itemValue="Four" itemLabel="4" />
+								<f:selectItem itemValue="Five" itemLabel="5" />
+								<f:selectItem itemValue="Six" itemLabel="6" />
+								<f:selectItem itemValue="Seven" itemLabel="7" />
+								<f:selectItem itemValue="Eight" itemLabel="8" />
+								<f:selectItem itemValue="Nine" itemLabel="9" />
+								<f:selectItem itemValue="Ten" itemLabel="10" />
+								<f:selectItem itemValue="Ten" itemLabel="11" />
+								<f:selectItem itemValue="Ten" itemLabel="12" />
+							</h:selectOneMenu>
+							<h:message for="experienceMonths" style="color:red" />
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<h:outputLabel styleClass="control-label" for="technologies">Technologies</h:outputLabel>
+					<h:inputText class="form-control" id="technologies"
+						value="#{hireeProfileService.user.technologies}" required="true"
+						requiredMessage="Technologies are required"
+						validatorMessage="Text entered is not valid">
+									<f:validateLength maximum="200"></f:validateLength>
+									<f:validateRegex pattern="[a-zA-Z][a-zA-Z ]+(, [a-zA-Z]+)+" />
+					</h:inputText>
+					<h:message for="technologies" style="color:red" />
+				</div>
 				<div class="form-group">
 					<h:outputLabel for="resume">Resume</h:outputLabel>
 					<h:inputFile class="form-control-file" id="resume"

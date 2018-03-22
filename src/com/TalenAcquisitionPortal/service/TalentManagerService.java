@@ -147,11 +147,13 @@ public class TalentManagerService {
 
 	public void postJob() {
 		String success="success";
+		String experience = jobDetails.getExperienceYears() + " Years " + jobDetails.getExperienceMonths() + " Months"; 
 		FacesContext context = FacesContext.getCurrentInstance();
 		String company = Login.getCompany(credentials.getUserName());
-		String status = Jobs.postJob(this.jobDetails.getJobDescription(), this.jobDetails.getEligibility(), company);
+		String status = Jobs.postJob(jobDetails, company, experience);
 		if(status.equals(success)) {
 			context.addMessage(null, new FacesMessage("Job Posted Successfully!!"));
+			jobDetails=new JobDetails();
 		}else {
 			context.addMessage(null, new FacesMessage("Job Posting Failed, please try after some time"));
 		}

@@ -1,6 +1,11 @@
 body{
-	background-image: url("cs.jpg");
 	font-family: "Lato", sans-serif;
+}
+.image {
+	background-image: url("../images/prof.jpg");
+}
+.navbar.navbar-inverse{
+	background: linear-gradient(to bottom right, #000066, #3333ff);
 }
 .sidenav {
     height: 100%;
@@ -9,11 +14,19 @@ body{
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #111;
+    background-color: #000066;
     overflow-x: hidden;
     padding-top: 20px;
 }
 
+.navbar-brand
+{
+  float:none
+  font-family: 'Lato', sans-serif;
+  color:grey;
+  font-size: 30px;
+  margin: 0px;
+}
 .sidenav a {
     padding: 6px 6px 6px 32px;
     text-decoration: none;

@@ -23,6 +23,7 @@ import com.TalenAcquisitionPortal.Dto.ApplicantsToRespond;
 import com.TalenAcquisitionPortal.Dto.Credentials;
 import com.TalentAcquisitionPortal.Dao.JobApplicationStatus;
 import com.TalentAcquisitionPortal.Dao.Login;
+import com.TalentAcquisitionPortal.Dao.UserProfile;
 
 @ManagedBean(name = "hrManagerService", eager = true)
 @RequestScoped
@@ -34,10 +35,29 @@ public class HrManagerService {
 	private String emailId;
 	private List<Applicants> applicants;
 	private String[] talentManagerSelected=new String[100];
+	private String[] action=new String[100];
 	private List<ApplicantsToRespond> aplicantsToRespond;
 	private String senderEmailId="smartflints@gmail.com";
 	private String senderPassword="fIN#1402";
+	private String phone;
 	
+	
+	public String[] getAction() {
+		return action;
+	}
+
+	public void setAction(String[] action) {
+		this.action = action;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 	public Credentials getCredentials() {
 		return credentials;
 	}
@@ -115,14 +135,16 @@ public class HrManagerService {
 		FacesContext context = FacesContext.getCurrentInstance();
 		newTalentManager.setRole("Talent Manager");
 		newTalentManager.setPassword("default");
-		String status=Login.insertUser(newTalentManager);
+		String status=Login.insertUser(newTalentManager, phone);
 		if(status=="success") {
 			context.addMessage(null, new FacesMessage("Talent Manager is registered!!!"));
+			newTalentManager= new Credentials();
 		}else if(status=="duplicate") {
 			context.addMessage(null, new FacesMessage("Talent manager already exisits"));
 		}else {
 			context.addMessage(null, new FacesMessage("Registration failed due to technical dificulties, please try after some time"));
 		}
+		phone=null;
 	}
 	
 	public List<Applicants> getApplicantsList() {
@@ -130,13 +152,23 @@ public class HrManagerService {
 		applicantsList = JobApplicationStatus.getApplicantsAwaitingHR();
 		for(Applicants applicant:applicantsList) {
 			applicant.setTalentManagers(Login.getTalentmanagers(applicant.getCompany()));
+			applicant.setComparission(UserProfile.getComparission(applicant.getJobid(), applicant.getEmail()));
 		}
 		return applicantsList;
 	}
 	
 	public void updateApplicationStatus(Applicants applicant, int index) {
-		JobApplicationStatus.updateApplicationStatusToAwaitingTalentManager(applicant.getEmail(), applicant.getJobid(), this.talentManagerSelected[index]);
+		String status;
+		String approve="Approve";
+		if(this.action[index].equals(approve)) {
+			status="Awaiting Approval From Talent Manager";
+		}else {
+			status="Applicant Rejected";
+		}
+		JobApplicationStatus.updateApplicationStatusToAwaitingTalentManager(applicant.getEmail(), applicant.getJobid(), this.talentManagerSelected[index], status);
 		this.applicants= getApplicantsList();
+		this.talentManagerSelected=new String[100];
+		this.action=new String[100];
 	}
 	
 	public List<ApplicantsToRespond> getApplicantsToRespond(){
