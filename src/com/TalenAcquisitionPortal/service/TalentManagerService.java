@@ -130,6 +130,7 @@ public class TalentManagerService {
 		approveReject.add("Reject");
 		for (Applicants applicant:applicantsList) {
 			applicant.setTalentManagers(approveReject);
+			applicant.setComparission(UserProfile.getComparission(applicant.getJobid(), applicant.getEmail()));
 		}
 		return applicantsList;
 	}

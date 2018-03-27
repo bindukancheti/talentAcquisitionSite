@@ -80,16 +80,17 @@
 							<h:selectOneMenu id="experiencYears"
 								value="#{talentManagerService.jobDetails.experienceYears}"
 								required="true" requiredMessage="Experience is required">
-								<f:selectItem itemValue="One" itemLabel="1" />
-								<f:selectItem itemValue="Two" itemLabel="2" />
-								<f:selectItem itemValue="Three" itemLabel="3" />
-								<f:selectItem itemValue="Four" itemLabel="4" />
-								<f:selectItem itemValue="Five" itemLabel="5" />
-								<f:selectItem itemValue="Six" itemLabel="6" />
-								<f:selectItem itemValue="Seven" itemLabel="7" />
-								<f:selectItem itemValue="Eight" itemLabel="8" />
-								<f:selectItem itemValue="Nine" itemLabel="9" />
-								<f:selectItem itemValue="Ten" itemLabel="10" />
+								<f:selectItem itemValue="00" itemLabel="0" />
+								<f:selectItem itemValue="01" itemLabel="1" />
+								<f:selectItem itemValue="02" itemLabel="2" />
+								<f:selectItem itemValue="03" itemLabel="3" />
+								<f:selectItem itemValue="04" itemLabel="4" />
+								<f:selectItem itemValue="05" itemLabel="5" />
+								<f:selectItem itemValue="06" itemLabel="6" />
+								<f:selectItem itemValue="07" itemLabel="7" />
+								<f:selectItem itemValue="08" itemLabel="8" />
+								<f:selectItem itemValue="09" itemLabel="9" />
+								<f:selectItem itemValue="10" itemLabel="10" />
 							</h:selectOneMenu>
 							<h:message for="experiencYears" style="color:red" />
 						</div>
@@ -100,18 +101,19 @@
 							<h:selectOneMenu id="experienceMonths"
 								value="#{talentManagerService.jobDetails.experienceMonths}"
 								required="true" requiredMessage="Experience is required">
-								<f:selectItem itemValue="One" itemLabel="1" />
-								<f:selectItem itemValue="Two" itemLabel="2" />
-								<f:selectItem itemValue="Three" itemLabel="3" />
-								<f:selectItem itemValue="Four" itemLabel="4" />
-								<f:selectItem itemValue="Five" itemLabel="5" />
-								<f:selectItem itemValue="Six" itemLabel="6" />
-								<f:selectItem itemValue="Seven" itemLabel="7" />
-								<f:selectItem itemValue="Eight" itemLabel="8" />
-								<f:selectItem itemValue="Nine" itemLabel="9" />
-								<f:selectItem itemValue="Ten" itemLabel="10" />
-								<f:selectItem itemValue="Ten" itemLabel="11" />
-								<f:selectItem itemValue="Ten" itemLabel="12" />
+								<f:selectItem itemValue="00" itemLabel="0" />
+								<f:selectItem itemValue="01" itemLabel="1" />
+								<f:selectItem itemValue="02" itemLabel="2" />
+								<f:selectItem itemValue="03" itemLabel="3" />
+								<f:selectItem itemValue="04" itemLabel="4" />
+								<f:selectItem itemValue="05" itemLabel="5" />
+								<f:selectItem itemValue="06" itemLabel="6" />
+								<f:selectItem itemValue="07" itemLabel="7" />
+								<f:selectItem itemValue="08" itemLabel="8" />
+								<f:selectItem itemValue="09" itemLabel="9" />
+								<f:selectItem itemValue="10" itemLabel="10" />
+								<f:selectItem itemValue="11" itemLabel="11" />
+								<f:selectItem itemValue="12" itemLabel="12" />
 							</h:selectOneMenu>
 							<h:message for="experienceMonths" style="color:red" />
 						</div>
@@ -124,7 +126,6 @@
 						required="true" requiredMessage="Technologies are required"
 						validatorMessage="Text entered is not valid">
 						<f:validateLength maximum="200"></f:validateLength>
-						<f:validateRegex pattern="[a-zA-Z][a-zA-Z ]+(, [a-zA-Z]+)+" />
 					</h:inputText>
 					<h:message for="technologies" style="color:red" />
 				</div>
