@@ -45,6 +45,10 @@
 					<h3 style="color: #000066">Applicants</h3>
 					<p>Below are the job applicants of Talent Acquisition Portal</p>
 				</div>
+				<div class="row">
+										<div class="col-sm-6" style="color: #000066"><b>Hiree Name</b></div>
+										<div class="col-sm-6" style="color: #000066"><b>Job Description</b></div>
+									</div>
 				<ui:repeat value="#{hrManagerService.applicants}" var="applicant"
 					varStatus="myVarStatus">
 					<div class="panel panel-default">
@@ -71,20 +75,24 @@
 										<thead>
 											<tr>
 												<th>Hiree Profile</th>
+												<th>Criteria</th>
 												<th>RequiredProfile</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr>
 												<td>#{applicant.comparission.experience}</td>
+												<td style="color: #000066"><b>Experience</b></td>
 												<td>#{applicant.comparission.requiredExperience}</td>
 											</tr>
 											<tr>
 												<td>#{applicant.comparission.aggregate}</td>
+												<td style="color: #000066"><b>Aggregate</b></td>
 												<td>#{applicant.comparission.requiredAggregate}</td>
 											</tr>
 											<tr>
 												<td>#{applicant.comparission.technologies}</td>
+												<td style="color: #000066"><b>Technologies</b></td>
 												<td>#{applicant.comparission.requiredTechnologies}</td>
 											</tr>
 										</tbody>
